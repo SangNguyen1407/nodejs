@@ -1,34 +1,27 @@
 var express = require('express');
-var router = express.Router();
-var mysql        = require('mysql2');
+var router  = express.Router();
+var database = require('../database/database');
 
-
-var con = mysql.createConnection({
-  host    : "localhost",
-  user    : "root",
-  password: "123456",
-  database: "database_persons"
-});
-
-con.connect();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  // query from database
-  var query = "SELECT * FROM table_persons";
-  con.query(query,  (err, result, fields) => {
-    
-  //  if (err) throw err;
-    
+  var result = database.Read(req, res);
+
+  result.then(function (arr) {
+    // do something with the rows
     res.render(
       'index', 
       { 
-        title: 'Express',
-        data: result
+        title: 'Express123',
+        data: arr
       }
     );
-
+  })
+  .catch(function (error) {
+      /* code if some error */ 
+      console.error( error )
   });
+
 
 });
 
