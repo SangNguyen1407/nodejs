@@ -58,49 +58,39 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody id = "tbody_table_persons">
           <tr>
-            <% data.forEach(function(row) { %>
-                <tr>
-                    <% for (let key in row) { %>
-                        <td><%= row[key] %></td>
-                    <% } %>
-                    <td> <button onclick="displayImage()">写真</button> </td>
-                    <script>
-                        function displayImage() {
-                            const imagePath = './images/IMG_5825.jpg';
-                            document.getElementById('displayedImage').src = imagePath;
-                            document.getElementById('imageContainer').style.display = 'block';
-                            }
-                    </script>
-                </tr>
-            <% }); %>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            <script>
+              var tbl = document.getElementById("table_persons");
+              var tblBody = document.getElementById("tbody_table_persons");
 
-    <div class="table2">
-      <table id="table_persons" border="1px solid black">
-        <thead>
-          <tr>
-              <th>Person ID</th>
-              <th>LastName</th>
-              <th>FirstName</th>
-              <th>Address</th>
-              <th>City</th>
-          </tr>
-        </thead>
+              // creating all cells
+              const str = "<%=data%>";
+              var content_test = str.split(",");
+              console.log(content_test);
+              for (var key of content_test) {
+                // creates a table row
+                var tr = document.createElement("tr");
+                var items = key.split(' ');
+                for (var item of items) {
+                  // Create a <td> element and a text node, make the text
+                  // node the contents of the <td>, and put the <td> at
+                  // the end of the table row
+                  var td = document.createElement("td");
+                  td.innerHTML = item;
+                   tr.appendChild(td);
+                }
 
-        <tbody>
-          <tr>
-            <% data.forEach(function(row) { %>
-                <tr>
-                    <% for (let key in row) { %>
-                        <td><%= row[key] %></td>
-                    <% } %>
-                </tr>
-            <% }); %>
+                // add the row to the end of the table body
+                tblBody.appendChild(tr);
+              }
+
+              // put the <tbody> in the <table>
+              tbl.appendChild(tblBody);
+
+
+            </script>
+          
           </tr>
         </tbody>
       </table>
@@ -109,3 +99,10 @@
 
   </body>
 </html>
+
+<!--
+https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+https://learn.microsoft.com/ja-jp/sql/connect/node-js/step-3-proof-of-concept-connecting-to-sql-using-node-js?view=sql-server-ver16
+
+https://qiita.com/ymasaoka/items/516fca97db9c37040619
+-->
