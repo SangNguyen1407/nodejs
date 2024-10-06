@@ -86,18 +86,6 @@ body {
   overflow-y    : auto;   /* table co scroll tren ca thead va tbody */
   position      : absolute; /* de can phai, trai, duoi, tren can phai co bien nay 
                                nam trong relative - parent , absolute la child */
-/*  top           : 500px;   /* can tren */
-  right         : 210px;   /* can phai */
-  bottom        : 10px;   /* can duoi */
-  width         : 500px;  /* chieu rong cua table */
-  height        : 300px;  /* chieu dai cua table */
-}
-
-/*setup div , ben trong div co table*/
-.table2 {
-  overflow-y    : auto;   /* table co scroll tren ca thead va tbody */
-  position      : absolute; /* de can phai, trai, duoi, tren can phai co bien nay 
-                               nam trong relative - parent , absolute la child */
   left          : 10px;   /* can trai */
   top           : 100px;   /* can tren */
   width         : 500px;  /* chieu rong cua table */
