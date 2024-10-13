@@ -1,0 +1,187 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.mainpage {
+  border : 10px solid RGBA( 255, 99, 71, 1 );
+  background-color: RGBA( 112, 128, 144, 1 );
+  /*margin: 50px;*/
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.scroll-content {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* ----------------title---------------- */
+.title_container {
+  border: 1px solid #ddd;
+  margin : 10px;
+}
+
+.title_container h1{
+  text-align: center;
+  color: #ddd;
+}
+/* ----------------table---------------- */
+.table_container {
+  border: 1px solid #ddd;
+  margin : 10px;
+  height: 600px;
+
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+#table_persons {
+  width: 100%;
+  border : 2px solid black;
+  border-spacing: 0;
+
+  overflow-y : auto;
+}
+
+#table_persons thead {
+  background-color: #009879; /* mau trong backgroud cua thead */
+  position: sticky;
+  top: 0;
+  z-index: 1;       /*thead dat nam tren */
+  width: 100%; 
+
+  text-align : center;  /*chu trong table can giua*/
+  color : #ffffff; /* mau chua cua thead */
+  font-size: 30px;
+}
+
+/* tbody background-color, to include hover tbody */
+#table_persons th {
+  height: 50px;
+}
+
+/* tbody background-color, to include hover tbody */
+#table_persons tr:hover td {
+  background-color: RGBA( 105, 105, 105, 0.2 );
+}
+
+#table_persons tbody {
+  text-align: center; /*chu trong table can giua*/
+}
+
+#table_persons td{
+  background-color: RGBA( 245, 222, 179, 1 );
+}
+
+/* ----------------button---------------- */
+.button_container {
+  border: 1px solid #ddd;
+  margin : 10px;
+  height: 120px;
+
+  display: block;
+  justify-content: space-between;
+  
+  text-align: center;
+}
+
+#input_button {
+  font-size: 40px; 
+  height: 100px; 
+  width: 200px;
+  margin: 10px;
+  margin-left: 0px;
+
+  color: RGBA( 240, 248, 255, 1 ); 
+  background-color: #40B3DF;
+}
+
+#input_button:hover {
+  background-color: white;
+  color: black; 
+}
+
+/* ----------------button---------------- */
+input[type=checkbox] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.menu {
+  background-color: #333;
+  width         : 200px;  /* chieu rong cua table */
+  height        : 100%;  /* chieu dai cua table */
+  z-index       : 1;
+  top           : 0px;   /* vi tri top cua menu - nam tren cung*/
+  left          : 0px;   /* vi tri left cua menu - nam ben trai cung*/
+  padding-top   : 60px;  /* vi tri dau tien cua chu trong menu */
+  overflow-x    : hidden;
+  position      : fixed; /* khi co them 1 div thu 2, 
+                            div2 nay dat o vi tri song song voi div menu */
+}
+
+.menu a {
+  padding         : 8px 8px 8px 32px; /* trong tab menu co the a, setup vi tri bao quanh the a nay*/
+  text-decoration : none;             /* chu trong the a de nguyen mau khong gach duoi, nghieng ...*/
+  font-size       : 25px;             /* font size cua chu */
+  position        : relative;         /* ???? */
+  color           : #818181;        /* mau cua chu*/
+  display         : block;            /* cac tab a nay tao thanh 1 group */
+}
+
+.menu_tab{
+  height        : 85%;
+}
+
+.menu_version{
+  height        : 5%;
+}
+
+.menu_version a1 {
+  padding         : 8px 8px 8px 32px; /* trong tab menu co the a, setup vi tri bao quanh the a nay*/
+  color           : #818181;        /* mau cua chu*/
+  font-size       : 15px;             /* font size cua chu */
+}
+
+.mainpage {
+  top           : 0px;
+  width         : 1700px;
+  height        : 900px;
+  left          : 200px;
+/*  background-color: #FFF4A3; */
+  position      : fixed;
+}
+
+/*setup div , ben trong div co table*/
+.div_table {
+  overflow-y    : auto;   /* table co scroll tren ca thead va tbody */
+  position      : absolute; /* de can phai, trai, duoi, tren can phai co bien nay 
+                               nam trong relative - parent , absolute la child */
+  left          : 10px;   /* can trai */
+  top           : 100px;   /* can tren */
+  width         : 60%;  /* chieu rong cua table */
+  height        : 300px;  /* chieu dai cua table */
+}
+
+.displayImage {
+  display: none;
+  overflow-y    : auto;
+  position      : absolute;
+  right         : 10px;   /* can phai */
+  top           : 100px;   /* can duoi */
+  width         : 500px;  /* chieu rong cua table */
+  height        : 300px; 
+}
+
+img {
+  max-width: 50%;
+}
+
+/*
+https://www.w3schools.com/howto/howto_js_sidenav.asp?
+ */
