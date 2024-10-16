@@ -38,69 +38,51 @@
 
         <tbody id = "tbody_table_persons">
           <tr>
-            <script>
-              var tbl = document.getElementById("table_persons");
-              var tblBody = document.getElementById("tbody_table_persons");
-
-              // creating all cells
-              const str = "<%=data%>";
-              var content_test = str.split(",");
-              console.log(content_test);
-              for (var key of content_test) {
-                // creates a table row
-                var tr = document.createElement("tr");
-                var i = 0;
-                var items = key.split(' ');
-                for (var item of items) {
-                  if (i == 0){
-                    var td = document.createElement('td');
-                    var a = document.createElement('a');
-                    a.innerHTML = item.trim();
-                    a.setAttribute('href', 'https://www.google.com');
-                    td.appendChild(a);
-                    tr.appendChild(td);
-                  }
-                  else if (i == 1 || i == 4 || i == 6){
-                    var td = document.createElement("td");
-                    td.innerHTML = item.trim() + ' ';
-                  }
-                  else if (i == 2 || i == 5 || i == 7){
-                    td.innerHTML += item.trim();
-                    tr.appendChild(td);
-                  }
-                  else {
-                    var td = document.createElement("td");
-                    td.innerHTML = item.trim();
-                    tr.appendChild(td);
-                  }
-                  i++;
-                } // cell
-                var td = document.createElement("td");
-                td.innerHTML = "<input type='checkbox'>"
-                tr.appendChild(td);
-                
-                // add the row to the end of the table body
-                tblBody.appendChild(tr);
-              }// end of row
-
-              // put the <tbody> in the <table>
-              tbl.appendChild(tblBody);
-
-
+            <!-- to use [/socket.io/socket.io.js] , need to install comment
+                 npm install socket.io --save 
+              -->
+            <script type="text/javascript" src="/socket.io/socket.io.js">
+              <%- include('../script/script.js'); %>
+              updateTable();
+              setInterval(updateTable, 300);
             </script>
-          
           </tr>
         </tbody>
       </table>
     </div>
     <div class="button_container">
-      <input id="input_button" type="button" value="Submit" />
+      <input id="input_button" type="button" value="Submit" onclick="functionSubmit()"/>
       <input id="input_button" type="button" value="Reset"/>
       <input id="input_button" type="button" value="Click Me!"/>
     </div>
     
-  </div>
+    <div id="response"></div>
 
+  </div>
+  <script>
+    function functionSubmit(){
+      window.location.href = "/submitForm";
+    }
+
+    function onRowClick(data){
+      var postData = JSON.stringify({
+        title: data.getElementsByTagName("td")[1].innerHTML
+      });
+
+      var form = document.createElement('form');
+      form.style.visibility = 'hidden'; // no user interaction is necessary
+      form.method = 'POST'; // forms by default use GET query strings
+      form.action = '/submitForm';
+  //    for (key in Object.keys(postData)) {
+        var input = document.createElement('input');
+        input.name = 'key';
+        input.value = postData;
+        form.appendChild(input); // add key/value pair to form
+   //   }
+      document.body.appendChild(form); // forms cannot be submitted outside of body
+      form.submit(); // send the payload and navigate
+    }
+  </script>
   </body>
 </html>
 

@@ -32,7 +32,7 @@ body {
 .table_container {
   border: 1px solid #ddd;
   margin : 10px;
-  height: 600px;
+  height: 400px;
 
   flex-grow: 1;
   overflow-y: auto;
