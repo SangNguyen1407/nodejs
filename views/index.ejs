@@ -37,16 +37,40 @@
         </thead>
 
         <tbody id = "tbody_table_persons">
-          <tr>
             <!-- to use [/socket.io/socket.io.js] , need to install comment
                  npm install socket.io --save 
               -->
-            <script type="text/javascript" src="/socket.io/socket.io.js">
-              <%- include('../script/script.js'); %>
-              updateTable();
-              setInterval(updateTable, 300);
+           <!-- <script type="text/javascript" src="/socket.io/socket.io.js">-->
+            <script type="text/javascript" >
+              var tbl = document.getElementById("table_persons");
+              var tblBody = document.getElementById("tbody_table_persons");
+              
+              var value = "<%=data%>";
+              var rows = value.split(',');
+              for (var key of rows) {
+                  // creates a table row
+                  var tr = document.createElement("tr");
+                  tr.setAttribute('onclick', 'onRowClick(this)');
+
+                  var items = key.split(';');
+                  for (var item of items) {
+                      var td = document.createElement("td");
+                      td.innerHTML = item.trim();
+                      tr.appendChild(td);
+                  } // cell
+                  var td = document.createElement("td");
+                  td.innerHTML = "<input type='checkbox'>";
+                  tr.appendChild(td);
+                  
+                  // add the row to the end of the table body
+                  tblBody.appendChild(tr);
+              }// end of row
+        
+              // put the <tbody> in the <table>
+              tbl.appendChild(tblBody);
+
+ //   });
             </script>
-          </tr>
         </tbody>
       </table>
     </div>

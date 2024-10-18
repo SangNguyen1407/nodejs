@@ -3,7 +3,6 @@ module.exports = {
     authentication: {
         type: 'default',
         options: {
-            port: 1433,
             userName: 'sa', //update me
             password: '123456'  //update me
         }

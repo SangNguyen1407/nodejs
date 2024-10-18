@@ -27,23 +27,17 @@ async function updateData() {
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  var result = database.Read(req, res);
-
-    result.then(function (arr) {
-      // do something with the rows
-      res.render(
-        'index', 
-        { 
-          title: 'Express123',
-          data: arr
-        }
-      );
-    })
-    .catch(function (error) {
-        /* code if some error */ 
-        console.error( error )
-    });
-
+  database.Read(req, res)
+  .then( result => {
+  //  console.log(result);
+    res.render(
+      'index', 
+      { 
+        title: 'Express123',
+        data: result
+      }
+    );
+  });
 });
 
 router.post('/submitForm', (req, res, next) => {

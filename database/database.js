@@ -8,18 +8,23 @@ var db_config  = require('../config/webconfig');
  * @param {*} config 
  */
 async function create_connect_to_sqlServer(config){
-  var connection = new Connection(config);  
+    // 読み込んだ行データの表示
+    return new Promise((resolve,reject) => {
+        var connection = new Connection(config);  
+        connection.on('connect', function(err) {  
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            reject(err);
+        }
+        else{
+            console.error('Connect sucessfully...');
+            resolve(connection);
+        }
+        });// end of connection
+        connection.connect();
+    });
 
-  connection.connect(function(err) {
-    if (err) {
-      console.error('error connecting: ' + err.stack);
-      return;
-    }
-  
-    console.log('connected as id ' + connection.threadId)
-  });// end of connection
-
-  return connection;
+//  return connection;
 } // end of create_connect_to_sqlServer
 
 
@@ -32,9 +37,10 @@ async function handle_query(conn, query){
     var arr = new Array();
     // テーブルからすべての行を読み込む
     const request = new Request(query, err => {
-        if (err) {
-            console.error(err.message);
-            conn.close();
+        if(err){
+            console.log(err);
+          }else{
+            console.log('Connected!:)');
         }
     });
 
@@ -52,7 +58,7 @@ async function handle_query(conn, query){
             arr.push(result.trim());
             result = "";
         }); // end of request
-        
+        console.log(JSON.stringify(result));
         request.on('error',    () => reject(error));
         request.on("doneProc", () => resolve(arr));
         
@@ -67,38 +73,41 @@ async function handle_query(conn, query){
  * @param {*} res 
  * @returns 
  */
-async function Read(req, res) {
+async function Read1(req, res) {
     console.log('テーブルの行データを読み取っています...');
     var ret = new Array();
     var query_statement = "SELECT *  FROM table_persons";
     /* result value is "new Promise"  */
-    var conn = await create_connect_to_sqlServer(db_config);
+ //   const conn = await create_connect_to_sqlServer(db_config);
 
-    let io = app.get('io');
+    let io = req.app.get('io');
     // receive data from http server
     io.on('connection', function (socket) {
+        var result = "";
         // when receive data on httpServer, excute query and send result to client every ttl 
         setInterval(
             async function () {
                 // excute query
-                var result = await handle_query(conn, query_statement);
+                result = await handle_query(connection, query_statement);
                 // send data to client with id = 'getLiveData'
-                socket.emit('getLiveData', result);
+                console.log(JSON.stringify(result));
+                socket.emit('getLiveData', JSON.stringify(result));
             },
             db_config['ttl']
-            )
+        );
     });
-
-    return result;
 
 }
 
-function Read() {
+async function Read() {
     console.log('テーブルの行データを読み取っています...');
     var ret = new Array();
-    query_statement = "SELECT *  FROM table_persons";
+    query_statement = " SELECT * "
+    query_statement+= " FROM table_persons;";
     /* result value is "new Promise"  */
-    var result = handle_query(query_statement);
+    var conn = await create_connect_to_sqlServer(db_config);
+    var result = await handle_query(conn, query_statement);
+    //console.log(result);
 
     return result;
 
