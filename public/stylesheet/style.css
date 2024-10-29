@@ -1,15 +1,10 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 800px;
+  position: relative;
 }
 
-.mainpage {
-  border : 10px solid RGBA( 255, 99, 71, 1 );
-  background-color: RGBA( 112, 128, 144, 1 );
-  /*margin: 50px;*/
-  flex-grow: 1;
-  overflow-y: auto;
-}
 .scroll-content {
   height: 200px;
   overflow-y: auto;
@@ -149,12 +144,16 @@ input[type=checkbox] {
 }
 
 .mainpage {
-  top           : 0px;
-  width         : 1700px;
-  height        : 900px;
+  border : 5px solid RGBA( 255, 99, 71, 1 );
+  background-color: RGBA( 112, 128, 144, 1 );
+
+  width         : 1800px;
+  height        : 100%;
   left          : 200px;
-/*  background-color: #FFF4A3; */
-  position      : fixed;
+  top           : 0px;
+  position      : fixed; /*mainpage co dinh khong di chuyen*/
+
+  overflow-y    : auto; /* di chuyen theo scroll*/
 }
 
 /*setup div , ben trong div co table*/

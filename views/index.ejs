@@ -45,19 +45,26 @@
               var tbl = document.getElementById("table_persons");
               var tblBody = document.getElementById("tbody_table_persons");
               
+              // receive data from route and split data 
               var value = "<%=data%>";
               var rows = value.split(',');
+
               for (var key of rows) {
                   // creates a table row
                   var tr = document.createElement("tr");
+                  // call onRowClick when click rows
                   tr.setAttribute('onclick', 'onRowClick(this)');
+                  // remove the last character and split string into array
+                  var items = key.slice(0, -1).split(';');
 
-                  var items = key.split(';');
+                  // add data into a row
                   for (var item of items) {
                       var td = document.createElement("td");
                       td.innerHTML = item.trim();
                       tr.appendChild(td);
                   } // cell
+
+                  // add checkbox into this row
                   var td = document.createElement("td");
                   td.innerHTML = "<input type='checkbox'>";
                   tr.appendChild(td);
