@@ -3,6 +3,9 @@ var router  = express.Router();
 var database = require('../database/database');
 var config  = require('../config/webconfig');
 
+
+const person_list_controller = require('../controllers/person_list_controller');
+
 let latestData = null;
 /*
 // Function to fetch and update data
@@ -26,7 +29,7 @@ async function updateData() {
 //setInterval(updateData, 3000);
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/1', (req, res, next) => {
   database.Read(req, res)
   .then( result => {
   //  console.log(result);
@@ -71,6 +74,25 @@ router.get('/submitForm', (req, res, next) => {
 
 });
 */
+
+/* GET home page. */
+router.get('/', async (req, res, next) => {
+  let result = await person_list_controller.getAllPerson();
+
+  let value = JSON.stringify(result);
+//  console.log("test............" + value);
+  res.render(
+    'index', 
+    { 
+      title: 'Express123',
+      data: value
+    }
+  );
+
+});
+
+
+
 module.exports = router;
 
 
