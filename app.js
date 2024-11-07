@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var submitFormRouter = require('./routes/submitForm');
 
+var webconfig = require('./config/webconfig');
+
 var app = express();
 var port= 3000;
 
@@ -28,10 +30,5 @@ app.use('/submitForm', submitFormRouter);
 app.get('/', (req, res) => {
   res.send("GET Request Called");
 });
-/*
-app.listen(port, () => {
-  console.log("Server listening on PORT", port);
-});
-*/
 
 module.exports = app;

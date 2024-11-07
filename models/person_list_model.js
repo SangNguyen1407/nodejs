@@ -1,7 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/webconfig')['development'];
 
-module.exports = (Sequelize, DataTypes) => {
-    const Person = Sequelize.define(
+module.exports = (sequelize, DataTypes) =>{
+    const Person = sequelize.define(
         "table_persons", 
         {
             PersonID : {

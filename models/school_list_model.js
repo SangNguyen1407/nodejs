@@ -1,7 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/webconfig')['development'];
+const {Sequelize, DataTypes } = require('sequelize');
 
-module.exports = (Sequelize, DataTypes) => {
-    const School = Sequelize.define(
+module.exports = (sequelize, DataTypes) =>{
+    const School = sequelize.define(
         "school_db", 
         {
             school_id : {
@@ -13,6 +14,5 @@ module.exports = (Sequelize, DataTypes) => {
             address : DataTypes.STRING,
         }
     );
-
     return School;
-}
+};

@@ -93,18 +93,18 @@
     }
 
     function onRowClick(data){
-      var postData = JSON.stringify({
+   /*   var postData = JSON.stringify({
         title: data.getElementsByTagName("td")[1].innerHTML
-      });
+      });*/
 
       var form = document.createElement('form');
       form.style.visibility = 'hidden'; // no user interaction is necessary
-      form.method = 'POST'; // forms by default use GET query strings
+      form.method = 'GET'; // forms by default use GET query strings
       form.action = '/submitForm';
   //    for (key in Object.keys(postData)) {
         var input = document.createElement('input');
         input.name = 'key';
-        input.value = postData;
+      //-  input.value = postData;
         form.appendChild(input); // add key/value pair to form
    //   }
       document.body.appendChild(form); // forms cannot be submitted outside of body

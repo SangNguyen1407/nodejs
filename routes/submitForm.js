@@ -9,7 +9,6 @@ router.post('/', (req, res, next) => {
 
 /* GET users listing. */
 router.post('/submitForm', (req, res, next) => {
-  console.log("test 12345...");
   res.render(
     'submitForm', 
     { 
